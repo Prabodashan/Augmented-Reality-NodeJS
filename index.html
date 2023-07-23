@@ -145,18 +145,17 @@
         // scene.addEventListener("mouseup", endInput);
 
         // Touch events
-        scene.addEventListener("touchstart", (e) => {
-          e.preventDefault();
-          const touch = e.touches[0];
-          startInput(touch.screenX, touch.screenY);
+        scene.addEventListener("pointerdown", (e) => {
+          // console.log("pointerdown", e);
+          // const touch = e.touches[0];
+          startInput(e.clientX, e.clientY);
         });
-        scene.addEventListener("touchmove", (e) => {
+        scene.addEventListener("pointermove", (e) => {
           e.preventDefault();
-          const touch = e.touches[0];
-          moveInput(touch.screenX, touch.screenY);
+          // const touch = e.touches[0];
+          moveInput(e.clientX, e.clientY);
         });
-        scene.addEventListener("touchend", endInput);
-        scene.addEventListener("touchcancel", endInput); // Add touch cancel event listener
+        scene.addEventListener("pointerup", endInput);
       });
     </script>
   </body>
