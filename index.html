@@ -38,12 +38,65 @@
           scale="1 1 1"
         ></a-obj-model> -->
         <a-entity
-          obj-model="obj: public/models/panda.obj;"
-          scale="0.5 0.5 0.5"
+          id="panda-entity"
+          obj-model="obj: public/models/brain.obj;"
+          material="src:public/textures/COLOR.png "
+          scale="0.003 0.003 0.003"
           position="0 0.5 0"
         ></a-entity>
+        <!-- <a-entity
+          id="text-entity"
+          position="1 0.5 0"
+          text="value: Hello, I'm on the right!; align: left; color: white; width: 6;"
+        ></a-entity> -->
       </a-marker>
       <a-entity camera></a-entity>
     </a-scene>
+
+    <script>
+      let isMouseDown = false;
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+
+      // Wait for the scene to load
+      document.querySelector("a-scene").addEventListener("loaded", function () {
+        // Get a reference to the <a-entity> element
+        const pandaEntity = document.getElementById("panda-entity");
+
+        // Listen for mousedown event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("mousedown", function (e) {
+            isMouseDown = true;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+          });
+
+        // Listen for mousemove event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("mousemove", function (e) {
+            if (isMouseDown) {
+              const rotationSpeed = 0.2; // Adjust the rotation speed as needed
+              const rotationX = (e.clientY - lastMouseY) * rotationSpeed;
+              const rotationY = (e.clientX - lastMouseX) * rotationSpeed;
+
+              // Update the rotation of the entity
+              pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
+              pandaEntity.object3D.rotation.y += THREE.Math.degToRad(rotationY);
+
+              lastMouseX = e.clientX;
+              lastMouseY = e.clientY;
+            }
+          });
+
+        // Listen for mouseup event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("mouseup", function () {
+            isMouseDown = false;
+          });
+      });
+    </script>
   </body>
 </html>
