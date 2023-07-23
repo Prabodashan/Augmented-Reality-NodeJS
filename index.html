@@ -115,6 +115,7 @@
           const rotationSpeed = 0.2; // Adjust the rotation speed as needed
           const rotationX = (y - lastInputY) * rotationSpeed;
           const rotationY = (x - lastInputX) * rotationSpeed;
+          console.log("x" + rotationX + " y" + rotationY);
 
           const pandaEntity = document.getElementById("panda-entity");
           pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
@@ -133,23 +134,26 @@
       document.querySelector("a-scene").addEventListener("loaded", function () {
         const scene = document.querySelector("a-scene");
 
-        // Mouse events
-        scene.addEventListener("mousedown", (e) =>
-          startInput(e.clientX, e.clientY)
-        );
-        scene.addEventListener("mousemove", (e) =>
-          moveInput(e.clientX, e.clientY)
-        );
-        scene.addEventListener("mouseup", endInput);
+        // // Mouse events
+        // scene.addEventListener("mousedown", (e) => {
+        //   startInput(e.clientX, e.clientY);
+        //   console.log("mousedown");
+        // });
+        // scene.addEventListener("mousemove", (e) => {
+        //   moveInput(e.clientX, e.clientY);
+        //   console.log("mousemove");
+        // });
+        // scene.addEventListener("mouseup", endInput);
 
         // Touch events
         scene.addEventListener("touchstart", (e) => {
           const touch = e.touches[0];
-          startInput(e.touches[0].clientX, e.touches[0].clientY);
+          startInput(touch.clientX, touch.clientY);
+          console.log("touchstart");
         });
         scene.addEventListener("touchmove", (e) => {
           const touch = e.touches[0];
-          moveInput(e.touches[0].clientX, e.touches[0].clientY);
+          moveInput(touch.clientX, touch.clientY);
         });
         scene.addEventListener("touchend", endInput);
         scene.addEventListener("touchcancel", endInput); // Add touch cancel event listener
