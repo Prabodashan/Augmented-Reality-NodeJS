@@ -53,7 +53,7 @@
       <a-entity camera></a-entity>
     </a-scene>
 
-    <script>
+    <!-- <script>
       let isMouseDown = false;
       let lastMouseX = 0;
       let lastMouseY = 0;
@@ -96,6 +96,63 @@
           .addEventListener("mouseup", function () {
             isMouseDown = false;
           });
+      });
+    </script> -->
+
+    <script>
+      let isInputActive = false;
+      let lastInputX = 0;
+      let lastInputY = 0;
+
+      function startInput(x, y) {
+        isInputActive = true;
+        lastInputX = x;
+        lastInputY = y;
+      }
+
+      function moveInput(x, y) {
+        if (isInputActive) {
+          const rotationSpeed = 0.2; // Adjust the rotation speed as needed
+          const rotationX = (y - lastInputY) * rotationSpeed;
+          const rotationY = (x - lastInputX) * rotationSpeed;
+
+          const pandaEntity = document.getElementById("panda-entity");
+          pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
+          pandaEntity.object3D.rotation.y += THREE.Math.degToRad(rotationY);
+
+          lastInputX = x;
+          lastInputY = y;
+        }
+      }
+
+      function endInput() {
+        isInputActive = false;
+      }
+
+      // Wait for the scene to load
+      document.querySelector("a-scene").addEventListener("loaded", function () {
+        const scene = document.querySelector("a-scene");
+
+        // Mouse events
+        scene.addEventListener("mousedown", (e) =>
+          startInput(e.clientX, e.clientY)
+        );
+        scene.addEventListener("mousemove", (e) =>
+          moveInput(e.clientX, e.clientY)
+        );
+        scene.addEventListener("mouseup", endInput);
+
+        // Touch events
+        scene.addEventListener("touchstart", (e) => {
+          const touch = e.touches[0];
+          startInput(touch.clientX, touch.clientY);
+        });
+        scene.addEventListener("touchmove", (e) => {
+          const touch = e.touches[0];
+          moveInput(touch.clientX, touch.clientY);
+        });
+        scene.addEventListener("touchend", endInput);
+        scene.addEventListener("touchcancel", endInput);
       });
     </script>
   </body>
