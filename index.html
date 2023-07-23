@@ -115,7 +115,6 @@
           const rotationSpeed = 0.2; // Adjust the rotation speed as needed
           const rotationX = (y - lastInputY) * rotationSpeed;
           const rotationY = (x - lastInputX) * rotationSpeed;
-          console.log("x" + rotationX + " y" + rotationY);
 
           const pandaEntity = document.getElementById("panda-entity");
           pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
@@ -147,11 +146,12 @@
 
         // Touch events
         scene.addEventListener("touchstart", (e) => {
+          e.preventDefault();
           const touch = e.touches[0];
           startInput(touch.clientX, touch.clientY);
-          console.log("touchstart");
         });
         scene.addEventListener("touchmove", (e) => {
+          e.preventDefault();
           const touch = e.touches[0];
           moveInput(touch.clientX, touch.clientY);
         });
