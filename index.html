@@ -133,16 +133,17 @@
       document.querySelector("a-scene").addEventListener("loaded", function () {
         const scene = document.querySelector("a-scene");
 
-        // // Mouse events
-        // scene.addEventListener("mousedown", (e) => {
-        //   startInput(e.clientX, e.clientY);
-        //   console.log("mousedown");
-        // });
-        // scene.addEventListener("mousemove", (e) => {
-        //   moveInput(e.clientX, e.clientY);
-        //   console.log("mousemove");
-        // });
-        // scene.addEventListener("mouseup", endInput);
+        // Mouse events
+        scene.addEventListener("mousedown", (e) => {
+          alert("mousedown");
+          startInput(e.clientX, e.clientY);
+          console.log("mousedown");
+        });
+        scene.addEventListener("mousemove", (e) => {
+          moveInput(e.clientX, e.clientY);
+          console.log("mousemove");
+        });
+        scene.addEventListener("mouseup", endInput);
 
         // Touch events
         scene.addEventListener("touchstart", (e) => {
