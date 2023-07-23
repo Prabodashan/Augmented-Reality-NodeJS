@@ -53,7 +53,7 @@
       <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- <script>
+    <script>
       let isMouseDown = false;
       let lastMouseX = 0;
       let lastMouseY = 0;
@@ -96,62 +96,40 @@
           .addEventListener("mouseup", function () {
             isMouseDown = false;
           });
-      });
-    </script> -->
 
-    <script>
-      let isInputActive = false;
-      let lastInputX = 0;
-      let lastInputY = 0;
+        // Listen for mousedown event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("touchstart", function (e) {
+            isMouseDown = true;
+            lastMouseX = e.clientX;
+            lastMouseY = e.clientY;
+          });
 
-      function startInput(x, y) {
-        isInputActive = true;
-        lastInputX = x;
-        lastInputY = y;
-      }
+        // Listen for mousemove event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("touchmove", function (e) {
+            if (isMouseDown) {
+              const rotationSpeed = 0.2; // Adjust the rotation speed as needed
+              const rotationX = (e.clientY - lastMouseY) * rotationSpeed;
+              const rotationY = (e.clientX - lastMouseX) * rotationSpeed;
 
-      function moveInput(x, y) {
-        if (isInputActive) {
-          const rotationSpeed = 0.2; // Adjust the rotation speed as needed
-          const rotationX = (y - lastInputY) * rotationSpeed;
-          const rotationY = (x - lastInputX) * rotationSpeed;
+              // Update the rotation of the entity
+              pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
+              pandaEntity.object3D.rotation.y += THREE.Math.degToRad(rotationY);
 
-          const pandaEntity = document.getElementById("panda-entity");
-          pandaEntity.object3D.rotation.x += THREE.Math.degToRad(rotationX);
-          pandaEntity.object3D.rotation.y += THREE.Math.degToRad(rotationY);
+              lastMouseX = e.clientX;
+              lastMouseY = e.clientY;
+            }
+          });
 
-          lastInputX = x;
-          lastInputY = y;
-        }
-      }
-
-      function endInput() {
-        isInputActive = false;
-      }
-
-      // Wait for the scene to load
-      document.querySelector("a-scene").addEventListener("loaded", function () {
-        const scene = document.querySelector("a-scene");
-
-        // Mouse events
-        scene.addEventListener("mousedown", (e) =>
-          startInput(e.clientX, e.clientY)
-        );
-        scene.addEventListener("mousemove", (e) =>
-          moveInput(e.clientX, e.clientY)
-        );
-        scene.addEventListener("mouseup", endInput);
-
-        // Touch events
-        scene.addEventListener("touchstart", (e) => {
-          const touch = e.touches[0];
-          startInput(touch.clientX, touch.clientY);
-        });
-        scene.addEventListener("touchmove", (e) => {
-          const touch = e.touches[0];
-          moveInput(touch.clientX, touch.clientY);
-        });
-        scene.addEventListener("touchend", endInput);
+        // Listen for mouseup event on the scene
+        document
+          .querySelector("a-scene")
+          .addEventListener("touchend", function () {
+            isMouseDown = false;
+          });
       });
     </script>
   </body>
