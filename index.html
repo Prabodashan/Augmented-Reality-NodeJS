@@ -144,12 +144,14 @@
 
         // Touch events
         scene.addEventListener("touchstart", (e) => {
+          console.log("touchstart ");
           const touch = e.touches[0];
-          startInput(touch.clientX, touch.clientY);
+          startInput(touch.pageX, touch.pageY);
         });
         scene.addEventListener("touchmove", (e) => {
+          console.log("touchmove");
           const touch = e.touches[0];
-          moveInput(touch.clientX, touch.clientY);
+          moveInput(touch.pageX, touch.pageY);
         });
         scene.addEventListener("touchend", endInput);
         scene.addEventListener("touchcancel", endInput); // Add touch cancel event listener
