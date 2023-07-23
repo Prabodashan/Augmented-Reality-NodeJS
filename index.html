@@ -138,11 +138,9 @@
         // Mouse events
         scene.addEventListener("mousedown", (e) => {
           startInput(e.clientX, e.clientY);
-          console.log("mousedown");
         });
         scene.addEventListener("mousemove", (e) => {
           moveInput(e.clientX, e.clientY);
-          console.log("mousemove");
         });
         scene.addEventListener("mouseup", endInput);
 
