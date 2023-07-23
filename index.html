@@ -146,8 +146,8 @@
         scene.addEventListener("mouseup", endInput);
 
         // Touch events
-        scene.addEventListener("touchstart", (e) => {
-          alert("touchstart");
+        scene.addEventListener("onclick", (e) => {
+          alert("onclick");
           e.preventDefault();
           const touch = e.touches[0];
           startInput(touch.clientX, touch.clientY);
