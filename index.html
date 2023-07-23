@@ -10,55 +10,49 @@
   </head>
   <body style="margin: 0px; overflow: hidden">
     <a-scene embedded arjs>
-      <!-- Add the AR marker -->
-      <a-marker
-        preset="custom"
-        type="pattern"
-        url="public/patterns/pattern-heart.patt"
-      >
-        <!-- <a-box
-          width="1"
-          height="1"
-          depth="1"
-          color="red"
-          position="0 0.5 0"
-        ></a-box> -->
-        <a-entity
-          id="panda-entity"
-          obj-model="obj: public/models/Heart.obj;"
-          material="src:public/textures/hart_UV_low01_BaseColor.hart_UV_low_defaultMat.png "
-          scale="0.03 0.03 0.03"
-          position="0 0.5 0"
-        ></a-entity>
-      </a-marker>
-
       <a-marker
         preset="custom"
         type="pattern"
         url="public/patterns/pattern-brain.patt"
       >
-        <!-- <a-obj-model
+        <a-entity
+          id="panda-entity"
+          obj-model="obj: public/models/brain.obj;"
+          material="src: public/textures/COLOR.png "
+          scale="0.003 0.003 0.003"
+          position="0 0.5 0"
+        ></a-entity>
+      </a-marker>
+
+      <!-- Add the AR marker -->
+      <a-marker
+        preset="custom"
+        type="pattern"
+        url="public/patterns/pattern-Heart.patt"
+      >
+        <a-entity
+          obj-model="obj: public/models/Heart.obj;"
+          material="src: public/textures/hart_UV_low01_BaseColor.hart_UV_low_defaultMat.png "
+          scale="0.003 0.003 0.003"
+          position="0 0.5 0"
+        ></a-entity>
+      </a-marker>
+      <a-entity camera></a-entity>
+    </a-scene>
+
+    <!-- <a-obj-model
           id="my3DModel"
           src="public/models/panda.obj"
           position="0 0 0"
           rotation="-90 0 0"
           scale="1 1 1"
         ></a-obj-model> -->
-        <a-entity
-          id="panda-entity"
-          obj-model="obj: public/models/brain.obj;"
-          material="src:public/textures/COLOR.png "
-          scale="0.003 0.003 0.003"
-          position="0 0.5 0"
-        ></a-entity>
-        <!-- <a-entity
+
+    <!-- <a-entity
           id="text-entity"
           position="1 0.5 0"
           text="value: Hello, I'm on the right!; align: left; color: white; width: 6;"
         ></a-entity> -->
-      </a-marker>
-      <a-entity camera></a-entity>
-    </a-scene>
 
     <!-- <script>
       let isMouseDown = false;
@@ -143,9 +137,11 @@
         // Mouse events
         scene.addEventListener("mousedown", (e) => {
           startInput(e.clientX, e.clientY);
+          console.log("mousedown");
         });
         scene.addEventListener("mousemove", (e) => {
           moveInput(e.clientX, e.clientY);
+          console.log("mousemove");
         });
         scene.addEventListener("mouseup", endInput);
 
