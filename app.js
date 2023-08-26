@@ -11,11 +11,6 @@ app.get("/", function (req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-const options = {
-  key: fs.readFileSync("keys/server.key"),
-  cert: fs.readFileSync("keys/server.crt"),
-};
-
-https.createServer(options, app).listen(3000, function () {
+https.createServer(app).listen(3000, function () {
   console.log("Server is running on localhost:3000");
 });
